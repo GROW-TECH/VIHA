@@ -1,0 +1,436 @@
+1. App Summary (for Bolt / Lovable prompt)
+
+Build a React web app called “Viha Sarees Management”.
+It is a ledger-style management system for a saree manufacturing business.
+The app has three main modules:
+
+Client Register,
+
+Product & Stock Register,
+
+Production Register with waste calculation, QR code and photo capture.
+All main pages should look like a handwritten notebook ledger with rows and columns that are easy to scan and update.
+
+You can copy that as the high-level description.
+
+2. Global Design System
+
+Layout
+
+Top navbar: App name “Viha Sarees Management”, current module, date filter, user menu.
+
+Left sidebar:
+
+Dashboard
+
+Client Register
+
+Product & Stock
+
+Production
+
+Reports (optional future)
+
+Ledger look & feel
+
+Main area is a full-width table like the photos:
+
+Light off-white background (paper).
+
+Thin grid lines between rows & columns.
+
+Header row with slightly darker background + red text (like red pen).
+
+Cells:
+
+Click to edit inline (turns into input).
+
+Move to next cell on Enter / Tab.
+
+Controls:
+
+Top right above table: Search bar, Filter dropdowns, Export button.
+
+Bottom: + Add Row button, and totals row where required.
+
+Typography & Colors
+
+Font: Simple readable (Roboto / Inter).
+
+Header text: dark red.
+
+Body text: dark grey or black.
+
+Use blue/red badges to mimic blue/red ink (e.g., Status = Pending in red).
+
+3. Module 1 – Client Register
+3.1 Page: Client Ledger
+
+Purpose
+Maintain all client details in a ledger format; easy to find and update.
+
+Layout
+
+Page title: Client Register
+
+Top bar:
+
+Search input (Client name / mobile)
+
+Filter: City, Type (Retail / Wholesale)
+
+Button: + New Client (opens modal OR adds empty row at top)
+
+Columns (table)
+
+Sr No.
+
+Client Name
+
+Mobile
+
+Alternate Mobile
+
+City / Area
+
+Type (dropdown: Retail, Wholesale, Dealer, Other)
+
+GST No. (text)
+
+Opening Balance (numeric, optional)
+
+Credit (numeric – total sales; read-only summary)
+
+Debit (numeric – total payments; read-only summary)
+
+Current Balance (auto calc)
+
+Notes / Remarks
+
+Row interactions
+
+Click on any cell → inline edit.
+
+Last column may have small icons:
+
+Eye icon → open Client Detail drawer (right-side panel)
+
+Trash icon → delete row (confirm dialog).
+
+3.2 Page: Client Detail Drawer (side panel)
+
+Opens when user views a client.
+
+Sections:
+
+Basic Info
+
+Name, mobile(s), type, city, GST.
+
+Recent Orders (simple list from Production module – later via backend)
+
+Outstanding Summary
+
+Opening, Total Sales, Total Paid, Balance.
+
+Design: simple right-side slide-in panel over the ledger.
+
+4. Module 2 – Product & Stock Register
+
+This covers design catalogue + finished stock in notebook style.
+
+4.1 Page: Product Master Ledger
+
+Purpose
+Store saree designs and their default info.
+
+Layout
+
+Page title: Design & Product Register
+
+Top controls:
+
+Search (Design Code / Name)
+
+Filters: Saree Type, Fabric, Colour
+
+Button: + New Design
+
+Columns
+
+Sr No.
+
+Design Code (e.g., CO-546)
+
+Design Name (text)
+
+Saree Type (Silk / Cotton / etc.)
+
+Fabric (e.g. Kanjivaram, Banarasi)
+
+Colour / Pattern
+
+Default Rate (per saree)
+
+Default MRP
+
+Opening Stock (pcs)
+
+Current Stock (pcs – read-only, from movements)
+
+In Production (pcs – read-only)
+
+Photo indicator (icon if photo exists)
+
+Notes
+
+Clicking row → opens Design Detail drawer.
+
+4.2 Page: Design Detail Drawer
+
+Sections:
+
+Design Info
+
+Same fields as row, but as a form.
+
+Button: Upload / Change Photo
+
+Show main saree photo.
+
+Stock Summary
+
+Current stock, in production, total produced, total sold.
+
+Recent Movements
+
+Small table:
+
+Date
+
+Type (Production In / Order Out / Adjustment)
+
+Qty
+
+Reference (Order No / Batch No)
+
+4.3 Page: Finished Stock Ledger
+
+You can keep this separate or merge inside Product module.
+
+Purpose
+Ledger of all stock movements, like a “Khata” for finished sarees.
+
+Layout
+
+Page title: Finished Stock Register
+
+Filter area:
+
+Date range
+
+Design dropdown
+
+Table columns:
+
+Sr No.
+
+Date
+
+Design Code
+
+Design Name
+
+Batch / Lot No.
+
+Transaction Type (Production In, Sale/Dispatch, Return, Manual Adj.)
+
+Qty In (pcs)
+
+Qty Out (pcs)
+
+Balance Stock (running total per design)
+
+Reference (Order / Invoice / Production No.)
+
+Remarks
+
+Bottom row: totals for Qty In, Qty Out.
+
+5. Module 3 – Production Register
+
+This is where you track work given, stock used, finished sarees, waste, QR, photo.
+
+You can implement as two sub-pages but keep ledger style:
+
+Production Orders (Issue Register)
+
+Production Completion (Receipt Register)
+
+5.1 Page: Production Orders (Issue Register)
+
+Purpose
+Record when work is sent to loom / unit.
+
+Layout
+
+Title: Production Issue Register
+
+Top controls:
+
+Search: Order No, Client, Design
+
+Filters: Status (Pending / In Production / Completed), Date range
+
+Button: + New Production Order (or add row)
+
+Columns
+
+Sr No.
+
+Order No. (auto code, but editable display)
+
+Date
+
+Client / Party (dropdown from Client Register)
+
+Design Code (dropdown from Design Register)
+
+Design Name (auto)
+
+Lot / Batch No.
+
+Qty Ordered (pcs)
+
+Rate per Piece
+
+Expected Delivery Date
+
+Grey / Material Issued (meters or pcs – text field)
+
+Status (badge: Pending / In Production / Completed / Cancelled)
+
+Remarks
+
+Clicking a row opens a Production Order Detail page/drawer.
+
+5.2 Page: Production Order Detail
+
+Tabs inside drawer/page:
+
+Tab 1: Order Info
+
+Show all fields from issue register.
+
+Allows editing for non-completed orders.
+
+Tab 2: Stock Used
+
+Ledger-style mini table:
+
+Columns:
+
+Material Type (Fabric, Border, Lace, Yarn, Others)
+
+Description
+
+Qty Issued
+
+Unit (m, kg, pcs)
+
+Remarks
+
+This is where you later connect to raw-material inventory (if needed).
+
+Tab 3: Completion & Waste
+
+Used when sarees are received.
+
+Fields:
+
+Production Date (date of receipt)
+
+Ordered Qty (readonly)
+
+Good Pieces Produced (numeric)
+
+Damaged / Reject Pieces (numeric)
+
+Total Material Used (from Stock Used tab; may be readonly)
+
+Waste Qty (auto: Used – (Good + Damaged) or manual override)
+
+Waste Remarks (dropdown: Cutting Loss, Colour Issue, Damage, etc.)
+
+Final Amount (Good Qty × Rate –/+ Adjustments)
+
+Payment Status (Pending / Partially Paid / Paid)
+
+Buttons:
+
+Save Completion
+
+On save, Status becomes Completed and system should:
+
+Increase Finished Stock for this design (Good pieces)
+
+Store damage and waste numbers.
+
+Also show a button: Generate QR & Manage Photos.
+
+5.3 Page / Modal: QR & Photo Management
+
+Can be a modal from Production Completion tab.
+
+Contents
+
+QR Section
+
+Show QR code image for:
+OrderNo | DesignCode | BatchNo | GoodQty
+
+Buttons:
+
+Download QR
+
+Print Label (future)
+
+Photo Section
+
+Button: Upload Saree Photo (or Capture on mobile).
+
+Show gallery grid (thumbnails).
+
+Each photo:
+
+Small caption text box (e.g. “Pallu close-up”).
+
+6. Simple Dashboard (optional but nice)
+
+Not required, but good to ask Bolt/Lovable:
+
+Cards:
+
+Total Clients
+
+Total Designs
+
+Stock value
+
+Pending Production Orders
+
+Small charts or summaries are optional.
+
+7. Key UX Requirements (so builders generate what you want)
+
+When you describe to Bolt / Lovable, include lines like:
+
+“Main pages should be ledger-style tables similar to a physical notebook, with lots of columns in a single view.”
+
+“Use inline editing in table cells instead of big separate forms wherever possible.”
+
+“Show side drawers / modals for detail view instead of full page navigation.”
+
+“Use search and simple dropdown filters on top of each ledger page.”
+
+“Support pagination at bottom of long ledgers.”
