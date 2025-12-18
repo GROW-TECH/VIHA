@@ -52,6 +52,7 @@ export default function MaterialRegister() {
   // ================= SUBMIT =================
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    console.log(data);
 
     try {
       if (editId) {
