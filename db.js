@@ -1,9 +1,9 @@
 import mysql from "mysql2/promise";
 
 export const pool = mysql.createPool({
-  host: "localhost",              // ✅ IMPORTANT
-  user: "growtechnologies_viha",   // cPanel DB user
-  password: "growtechnologies_viha",  // 🔴 NOT db name
+  host: "l4cp.vnetindia.com",
+  user: "growtechnologies_viha",
+  password: "growtechnologies_viha",
   database: "growtechnologies_viha",
   port: 3306,
   waitForConnections: true,
